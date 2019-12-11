@@ -1,0 +1,6 @@
+C:\Users\mastr\source\repos\MovieStart\MovieStart\obj\Debug\MovieStart.csprojAssemblyReference.cache
+C:\Users\mastr\source\repos\MovieStart\MovieStart\bin\Debug\MovieStart.exe.config
+C:\Users\mastr\source\repos\MovieStart\MovieStart\bin\Debug\MovieStart.exe
+C:\Users\mastr\source\repos\MovieStart\MovieStart\bin\Debug\MovieStart.pdb
+C:\Users\mastr\source\repos\MovieStart\MovieStart\obj\Debug\MovieStart.exe
+C:\Users\mastr\source\repos\MovieStart\MovieStart\obj\Debug\MovieStart.pdb
