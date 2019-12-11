@@ -9,8 +9,10 @@ namespace MovieStart
 {
     class Program
     {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         static void Main(string[] args)
         {
+            logger.Info("Program started");
             string file = "movies.csv";
             Console.WriteLine("Movie Library");
             int frst;
@@ -22,57 +24,70 @@ namespace MovieStart
 
                 while (frst == 1)
                 {
-                    StreamReader sr = new StreamReader(file);
-                    while (!sr.EndOfStream)
+                    try
                     {
-                        string line = sr.ReadLine();
-                        Console.WriteLine(line);
-                        
+                        logger.Info("Read File");
+                        StreamReader sr = new StreamReader(file);
+                        while (!sr.EndOfStream)
+                        {
+                            string line = sr.ReadLine();
+                            Console.WriteLine(line);
+
+                        }
+                        sr.Close();
+                        break;
+                    }catch(Exception e)
+                    {
+                        logger.Error("File not read");
                     }
-                    sr.Close();
-                    break;
                 }
 
                 while (frst == 2)
                 {
-                    int id = 1;
-                    StreamReader sr = new StreamReader(file);
-                    while (!sr.EndOfStream)
-                    {
-                        string line = sr.ReadLine();
-                        id++;
-                    }
-
-                    string gen = "";
-                    int i = 0;
-                    Console.WriteLine("Enter Information Bellow");
-                    Console.Write("Title:");
-                    String title = Console.ReadLine();
-                    Console.Write("Year: ");
-                    int year = Int32.Parse(Console.ReadLine());
-                    Console.Write("Genere (type X when finished");
-                    string genre = "";
-                    while (genre != "x" || genre != "X")
-                    {
-                        genre = Console.ReadLine();
-                        gen += genre + " | ";
-                        i++;
-
-                        if (genre != "x" || genre != "X")
+                    try {
+                        logger.Info("Write file movie to file");
+                        int id = 1;
+                        StreamReader sr = new StreamReader(file);
+                        while (!sr.EndOfStream)
                         {
-                            break;
+                            string line = sr.ReadLine();
+                            id++;
                         }
 
-                        
+                        string gen = "";
+                        int i = 0;
+                        Console.WriteLine("Enter Information Bellow");
+                        Console.Write("Title:");
+                        String title = Console.ReadLine();
+                        Console.Write("Year: ");
+                        int year = Int32.Parse(Console.ReadLine());
+                        Console.Write("Genere (type X when finished");
+                        string genre = "";
+                        while (genre != "x" || genre != "X")
+                        {
+                            genre = Console.ReadLine();
+                            gen += genre + " | ";
+                            i++;
+
+                            if (genre != "x" || genre != "X")
+                            {
+                                break;
+                            }
+
+
+                        }
+
+
+                        string line3 = id.ToString() + ", " + title + ", " + "(" + year.ToString() + ")" + ", " + string.Join("|", gen);
+                        StreamWriter sw = new StreamWriter(file, true);
+                        sw.WriteLine(line3);
+                        sw.Close();
+                        break;
+
+                    }catch(Exception e)
+                    {
+                        logger.Error("File not writen");
                     }
-
-
-                    string line3 = id.ToString()+", " + title + ", " + "(" +year.ToString()+ ")" +", " + string.Join("|", gen);
-                    StreamWriter sw = new StreamWriter(file, true);
-                    sw.WriteLine(line3);
-                    sw.Close();
-                    break;
-                        
                 }
 
                 Console.WriteLine("1) View Library\n2) Add to library\n3)Exit");
